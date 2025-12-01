@@ -18,7 +18,7 @@ This project implements a **complete access management system** using an Arduino
 It simulates a real-world gate controller where access is granted only after PIN validation.  
 Once authenticated, the servo motor opens the gate, IR sensors detect obstacles, and the LCD displays meaningful messages.
 
-A blinking LED at **1 Hz** acts as a system heartbeat indicator.
+A blinking LED at **1 Hz**.
 
 ---
 
