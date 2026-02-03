@@ -1,62 +1,124 @@
- Arduino Access Control System  
-Access control system using Arduino, a servo motor for gate control, IR obstacle sensors, a 4×3 keypad for PIN authentication, LCD display for user feedback, and a 1 Hz status LED.
+ # Arduino Access Control System
 
-<div align="center">
-
-![Arduino](https://img.shields.io/badge/Arduino-Project-00979D?logo=arduino&logoColor=white)
-![C/C++](https://img.shields.io/badge/Language-C/C++-blue)
-![Hardware](https://img.shields.io/badge/Hardware-Embedded-orange)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-
-</div>
+This project implements a complete Arduino-based access control system, simulating a real-world automatic gate controller.  
+Access is granted only after successful PIN authentication via a keypad, and the system ensures safety through obstacle detection and visual feedback.
 
 ---
 
-## 📌 Overview
+## 📌 Project Overview
 
-This project implements a **complete access management system** using an Arduino microcontroller.  
-It simulates a real-world gate controller where access is granted only after PIN validation.  
-Once authenticated, the servo motor opens the gate, IR sensors detect obstacles, and the LCD displays meaningful messages.
+The system is built around an Arduino microcontroller and integrates multiple hardware components to manage secure access control.  
+A user must enter a valid PIN code using a 4x3 keypad. If authentication is successful, a servo motor opens the gate.  
+Infrared obstacle sensors continuously monitor the gate area to prevent closing while an obstacle is detected.
 
-A blinking LED at **1 Hz**.
-
----
-
-## 🛠️ Features
-
-- 🔐 **PIN authentication** using a 4×3 matrix keypad  
-- 🚪 **Servo-controlled gate** (open/close logic)  
-- 👁️ **IR obstacle detection** for safety  
-- 🖥️ **LCD 16×2 display** for system feedback  
-- 💡 **1 Hz heartbeat LED** showing system status  
-- 🧠 Clean and modular code structure  
-- 🛡️ Safety routines to avoid closing the gate while an obstacle is detected  
+User feedback is provided through an LCD display and LED indicators, ensuring clear system status visualization at all times.
 
 ---
 
-## 🔧 Hardware Used
+## ⚙️ System Features
 
-- Arduino UNO / Nano / similar  
-- SG90 or other servo motor  
-- 4×3 matrix keypad  
-- IR obstacle sensors (HW-201 or equivalent)  
-- LCD 16×2 with or without I2C interface  
-- LED + resistor (1 Hz heartbeat)  
-- Jump wires and breadboard  
+- PIN-based authentication using a 4x3 matrix keypad  
+- Servo motor control for gate opening and closing  
+- Infrared obstacle detection to ensure safety  
+- Automatic gate closing when no obstacle is detected  
+- LCD display for real-time user feedback  
+- Status LEDs for visual indication of system states  
+- Periodic status LED blinking at 1 Hz  
+- Serial communication for debugging and monitoring  
 
 ---
 
-🔄 Workflow
+## 🧠 System Logic
 
-⌨️ User inputs a PIN using the 4×3 keypad
-🔍 System validates the PIN
-If the PIN is incorrect → LCD displays “Access Denied”
-If the PIN is correct → system proceeds
-🚪 Servo motor opens the gate
-👁️ IR sensors monitor for obstacles
-If an obstacle is detected → gate remains open
-LCD displays “Obstacle detected – waiting”
-⏳ When no obstacle is detected, the system waits a short delay
-🚪 Servo motor closes the gate
-💡 Status LED continues blinking at 1 Hz to indicate normal system operation
-🔁 System returns to standby mode and waits for the next PIN entry
+1. The system initializes all peripherals (LCD, USART, timers, I/O ports).
+2. The user enters a 4-digit PIN via the keypad.
+3. The entered PIN is validated against predefined valid PINs.
+4. If the PIN is correct:
+   - The servo motor opens the gate.
+   - The LCD displays a success message.
+5. While the gate is open:
+   - IR sensors continuously check for obstacles.
+   - The gate will not close if an obstacle is detected.
+6. When no obstacle is detected:
+   - The gate closes automatically.
+7. LEDs indicate system status and operating modes.
+
+---
+
+## 🧩 Hardware Components
+
+- Arduino (ATmega-based)
+- Servo motor (gate actuator)
+- 4x3 matrix keypad
+- Infrared obstacle sensors
+- 16x2 LCD display
+- Status LEDs
+- External power supply (5 V)
+
+---
+
+## 🗂️ Project Structure
+
+Access-Control-System-Arduino/
+├── arduino/
+│ └── main.ino
+│ └── lcd.c
+│ └── lcd.h
+│ └── usart.c
+│ └── usart.h
+├── script_python/
+│ └── usart_diario.py
+├── docs/
+│ └── report
+├── README.md
+
+
+---
+
+## 🛠️ Development Details
+
+- Language: C / C++ / python / html
+- Platform: Arduino / VSCode
+- Development Environment: Arduino IDE , VSCode
+- Timers and registers are configured directly where applicable
+- Modular code structure for readability and maintainability
+
+---
+
+## 📟 User Feedback
+
+- **LCD Display**
+  - Prompts for PIN entry
+  - Authentication success or failure messages
+  - Gate status information
+
+- **LED Indicators**
+  - System active indication
+  - Visual status feedback at 1 Hz
+
+---
+
+## 🎓 Academic Context
+
+This project was developed as part of an academic engineering context and demonstrates practical knowledge in:
+- Embedded systems programming
+- Digital I/O manipulation
+- Timers and interrupts
+- Human-machine interfaces
+- Safety mechanisms in control systems
+
+---
+
+## 🚀 Future Improvements
+
+- EEPROM storage for dynamic PIN management
+- Buzzer for audio feedback
+- Real-time clock (RTC) integration
+- Remote monitoring via network or IoT module
+
+---
+
+## 👤 Author
+
+Developed by **Rui Bastos**  
+Electrical and Computer Engineering Student
